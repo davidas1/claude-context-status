@@ -5,6 +5,8 @@ status bar. Designed for people who run several Claude Code chat tabs in the
 native VS Code extension at once and want to see at a glance which one is
 about to fill its context.
 
+![status bar and hover tooltip showing context at 182k tokens (danger state) with plan-usage bars](docs/claude-context-status.jpg)
+
 ## What it shows
 
 **Status bar:** `$(pulse) ctx 137k +12k │ S:3% W:18%`
@@ -61,6 +63,21 @@ npm run compile
 
 ## Settings
 
+### How to open the settings UI
+
+Any of these will open VS Code's normal Settings UI, pre-filtered to this
+extension — so you can tweak thresholds, display mode, etc. with sliders and
+dropdowns instead of editing JSON:
+
+- **From the status bar:** hover the `ctx …` indicator and click **⚙ Settings** at the bottom of the tooltip.
+- **Command Palette** (`Cmd/Ctrl+Shift+P`): run `Claude Context: Open Settings`.
+- **Manually:** open Settings (`Cmd/Ctrl+,`) and type `claudeContext` in the search box, or paste `@ext:davidas1.claude-context-status` to see only this extension's settings.
+
+If you'd rather edit JSON directly, the keys live under `claudeContext.*` in
+your user `settings.json`.
+
+### Available settings
+
 | Setting | Default | What it does |
 |---|---|---|
 | `claudeContext.contextDisplay` | `tokens` | `tokens`, `percent`, or `both` |
@@ -76,6 +93,7 @@ npm run compile
 - **Claude Context: Switch Tracked Session** — pick from all live sessions
 - **Claude Context: Unpin (auto-pick most recent)** — return to following whichever session is most active
 - **Claude Context: Refresh Now** — force-refresh plan usage
+- **Claude Context: Open Settings** — jump to VS Code's settings UI for this extension
 
 ## Caveats
 

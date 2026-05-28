@@ -337,6 +337,7 @@ function appendActions(md: vscode.MarkdownString, sessionCount: number) {
     parts.push(`[$(pin) Unpin](command:claudeContext.unpin)`);
   }
   parts.push(`[$(refresh) Refresh](command:claudeContext.refresh)`);
+  parts.push(`[$(gear) Settings](command:claudeContext.openSettings)`);
   md.appendMarkdown(parts.join(" &nbsp;·&nbsp; "));
 }
 
@@ -482,6 +483,12 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand("claudeContext.refresh", async () => {
       await refreshPlanUsage();
       render();
+    }),
+    vscode.commands.registerCommand("claudeContext.openSettings", () => {
+      vscode.commands.executeCommand(
+        "workbench.action.openSettings",
+        "@ext:davidas1.claude-context-status"
+      );
     }),
     vscode.commands.registerCommand("claudeContext.unpin", () => {
       if (!pinnedSessionId) {

@@ -36,6 +36,10 @@
       {
         "command": "claudeContext.unpin",
         "title": "Claude Context: Unpin (auto-pick most recent)"
+      },
+      {
+        "command": "claudeContext.openSettings",
+        "title": "Claude Context: Open Settings"
       }
     ],
     "configuration": {
