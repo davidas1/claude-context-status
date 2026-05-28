@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - run: npm ci
+      - run: npm run compile
+
+      - name: Package .vsix
+        run: npx --yes @vscode/vsce package --no-dependencies --out claude-context-status.vsix
+
+      - name: Upload artifact (always — handy for workflow_dispatch runs)
+        uses: actions/upload-artifact@v4
+        with:
+          name: claude-context-status-vsix
+          path: claude-context-status.vsix
+
+      - name: Attach .vsix to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: claude-context-status.vsix
+          generate_release_notes: true

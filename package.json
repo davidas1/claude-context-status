@@ -1,0 +1,97 @@
+{
+  "name": "claude-context-status",
+  "displayName": "Claude Code Context & Usage",
+  "description": "Shows the active Claude Code chat's context-window usage and your plan limits in the status bar.",
+  "version": "0.1.0",
+  "publisher": "davidas1",
+  "license": "MIT",
+  "author": {
+    "name": "David Asulin"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidas1/claude-context-status.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davidas1/claude-context-status/issues"
+  },
+  "homepage": "https://github.com/davidas1/claude-context-status#readme",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["claude", "claude code", "anthropic", "status bar", "context"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "claudeContext.switchSession",
+        "title": "Claude Context: Switch Tracked Session"
+      },
+      {
+        "command": "claudeContext.refresh",
+        "title": "Claude Context: Refresh Now"
+      },
+      {
+        "command": "claudeContext.unpin",
+        "title": "Claude Context: Unpin (auto-pick most recent)"
+      }
+    ],
+    "configuration": {
+      "title": "Claude Code Context & Usage",
+      "properties": {
+        "claudeContext.refreshIntervalSeconds": {
+          "type": "number",
+          "default": 5,
+          "description": "How often (seconds) to re-read the active session's context."
+        },
+        "claudeContext.usageRefreshIntervalSeconds": {
+          "type": "number",
+          "default": 120,
+          "description": "How often (seconds) to poll the plan-usage endpoint."
+        },
+        "claudeContext.showPlanUsage": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show plan usage (session/weekly limits) alongside context."
+        },
+        "claudeContext.warnAtTokens": {
+          "type": "number",
+          "default": 100000,
+          "description": "Tint the status bar yellow when context reaches this many tokens."
+        },
+        "claudeContext.dangerAtTokens": {
+          "type": "number",
+          "default": 150000,
+          "description": "Tint the status bar red when context reaches this many tokens."
+        },
+        "claudeContext.contextDisplay": {
+          "type": "string",
+          "enum": ["tokens", "percent", "both"],
+          "enumDescriptions": [
+            "Raw token count, e.g. 'ctx 137k'.",
+            "Percent of the context limit, e.g. 'ctx 69%'.",
+            "Both, e.g. 'ctx 137k · 69%'."
+          ],
+          "default": "tokens",
+          "description": "How to display the current context size in the status bar."
+        },
+        "claudeContext.contextLimit": {
+          "type": "number",
+          "default": 200000,
+          "description": "Denominator for percent display, in tokens. Set to 1000000 if you run a 1M-context model. Warn/danger thresholds remain in absolute tokens regardless."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.0"
+  }
+}
