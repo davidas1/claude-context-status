@@ -5,7 +5,7 @@ status bar. Designed for people who run several Claude Code chat tabs in the
 native VS Code extension at once and want to see at a glance which one is
 about to fill its context.
 
-![status bar and hover tooltip showing context at 182k tokens (danger state) with plan-usage bars](docs/claude-context-status.jpg)
+<img src="docs/claude-context-status.jpg" alt="status bar and hover tooltip showing context at 182k tokens (danger state) with plan-usage bars" width="520">
 
 ## What it shows
 
