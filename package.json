@@ -2,7 +2,7 @@
   "name": "claude-context-status",
   "displayName": "Claude Code Context & Usage",
   "description": "Shows the active Claude Code chat's context-window usage and your plan limits in the status bar.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "davidas1",
   "license": "MIT",
   "author": {
@@ -19,9 +19,19 @@
   "engines": {
     "vscode": "^1.85.0"
   },
-  "categories": ["Other"],
-  "keywords": ["claude", "claude code", "anthropic", "status bar", "context"],
-  "activationEvents": ["onStartupFinished"],
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "claude",
+    "claude code",
+    "anthropic",
+    "status bar",
+    "context"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
@@ -72,7 +82,11 @@
         },
         "claudeContext.contextDisplay": {
           "type": "string",
-          "enum": ["tokens", "percent", "both"],
+          "enum": [
+            "tokens",
+            "percent",
+            "both"
+          ],
           "enumDescriptions": [
             "Raw token count, e.g. 'ctx 137k'.",
             "Percent of the context limit, e.g. 'ctx 69%'.",
